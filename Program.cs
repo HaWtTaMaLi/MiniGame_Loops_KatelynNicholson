@@ -8,37 +8,68 @@ namespace MiniGame_Loops_KatelynNicholson
 {
     internal class Program
     {
-
-        static int playerPosition = 0;
+  
+        static int playerPosition;
         static bool gameOver = false;
+        static int x;
+        static int y;
+
+        static bool[,] playArea = new bool [20,20];
 
         static void Main()
         {
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            for (int y = 0; y < 20; y++)
+            {
+                for(int x = 0; x < 20; x++)
+                {
+                    playArea[y, x] = true;
+                    if (playArea[y, x])
+                        Console.Write("  ");
+                    else
+                        gameOver = true;
+                }
+                Console.WriteLine();
+            }
+
+            //playerPosition = //x and y
             //move player using WASD
-            
+            x = 3;
+            y = 3;
+            char player = 'O';
 
-            //have a trail follow player
-            //if player exits pannel. you loose
-            //hit escape to exit
-            //keep trail visable and if player lands on a spot already marked then. you loose//visited
-            //array playable area
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.SetCursorPosition(x, y);
+                Console.Write($"=[{player}.O]=");
+                ConsoleKey key = Console.ReadKey(true).Key;
+
+                switch (key)
+                {
+                    case ConsoleKey.W:
+                        if (y > 0) y--;
+                        break;
+                    case ConsoleKey.S:
+                        if (y < Console.WindowHeight - 1) y++;
+                        break;
+                    case ConsoleKey.A:
+                        if (x > 0) x--;
+                        break;
+                    case ConsoleKey.D:
+                        if (x < Console.WindowWidth - 1) x++;
+                        break;
+                    case ConsoleKey.Escape: //hit escape to exit
+                        return;
+                }
+                //if player exits pannel. you loose
+                //array playable area
+            }
         }
-
-
-        static void PlayerDraw(int x, int y)
+        static  void PlayerDraw(int x, int y)
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.SetCursorPosition(5, 2);
-            Console.WriteLine("^ ^");
-            Console.SetCursorPosition(3, 3);
-            Console.WriteLine("=[0.0]=");
-            Console.ForegroundColor = ConsoleColor.White;
+
         }
 
-        static void PlayerUpdate(int x,int y)
-        {
-            //console.readkey()
-            //console.keyinfor.keychar
-        }
     }
 }
