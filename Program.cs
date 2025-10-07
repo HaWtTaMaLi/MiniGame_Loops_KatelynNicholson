@@ -8,8 +8,22 @@ namespace MiniGame_Loops_KatelynNicholson
 {
     internal class Program
     {
+
+        static int playerPosition = 0;
+
         static void Main()
         {
+
+            //player
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.SetCursorPosition(5,2);
+            Console.WriteLine("^ ^");
+            Console.SetCursorPosition(3,3);
+            Console.WriteLine("=[0.0]=");
+            Console.ForegroundColor = ConsoleColor.White;
+            //
+
+
 
             //move player using WASD
             //have a trail follow player
