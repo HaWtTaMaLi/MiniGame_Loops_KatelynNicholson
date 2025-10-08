@@ -15,19 +15,20 @@ namespace MiniGame_Loops_KatelynNicholson
         static int y;
 
         static bool[,] playArea = new bool [20,20];
+        static bool[,] visited = new bool [x,y];
 
         static void Main()
         {
+
+            Console.CursonrVisable = false;
             Console.BackgroundColor = ConsoleColor.DarkGreen;
+
             for (int y = 0; y < 20; y++)
             {
                 for(int x = 0; x < 20; x++)
                 {
                     playArea[y, x] = true;
-                    if (playArea[y, x])
                         Console.Write("  ");
-                    else
-                        gameOver = true;
                 }
                 Console.WriteLine();
             }
@@ -37,13 +38,15 @@ namespace MiniGame_Loops_KatelynNicholson
             x = 3;
             y = 3;
             char player = 'O';
+            visited[y, x] = true;
 
-            while (true)
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.SetCursorPosition(x, y);
+
+            while (!gameOver)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.SetCursorPosition(x, y);
-                Console.Write($"=[{player}.O]=");
-                ConsoleKey key = Console.ReadKey(true).Key;
+
+                ConsoleKey = Console.ReadKey(true).Key;
 
                 switch (key)
                 {
@@ -51,25 +54,31 @@ namespace MiniGame_Loops_KatelynNicholson
                         if (y > 0) y--;
                         break;
                     case ConsoleKey.S:
-                        if (y < Console.WindowHeight - 1) y++;
+                        if (y < 19) y++;
                         break;
                     case ConsoleKey.A:
                         if (x > 0) x--;
                         break;
                     case ConsoleKey.D:
-                        if (x < Console.WindowWidth - 1) x++;
+                        if (x 19) x++;
                         break;
                     case ConsoleKey.Escape: //hit escape to exit
                         return;
                 }
+
+                if (visited[y, x])
+                { 
+                    gameOver = true;
+                    Console.Clear();
+                    Console.WriteLine("You stepped on a visited tile! GameOver!");
+                    break;
+                }
+
+                    visited[y, x] = true;
+
                 //if player exits pannel. you loose
                 //array playable area
             }
         }
-        static  void PlayerDraw(int x, int y)
-        {
-
-        }
-
     }
 }
